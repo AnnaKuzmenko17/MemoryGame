@@ -83,7 +83,7 @@ function checkMatch () {
     cards[secondOption].removeEventListener('click', flipCard);
     wonIds.push(chosenCards);
     result.innerHTML = wonIds.length;
-
+    
   } else {
     cards[firstOption].setAttribute('src', 'img/blank.png');
     cards[secondOption].setAttribute('src', 'img/blank.png');
@@ -117,3 +117,4 @@ function refreshGame () {
   wonIds = [];
   result.innerHTML = 0;
 }
+
