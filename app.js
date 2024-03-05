@@ -57,7 +57,7 @@ const gradDisplay = document.querySelector('#grid');
 function refreshGame () {
  
   cardArray.sort(() => 0.5 - Math.random());
-  create board();
+  createBoard();
   }
 
 function createBoard () {
