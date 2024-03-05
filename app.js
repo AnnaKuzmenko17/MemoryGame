@@ -52,7 +52,7 @@ const cardArray = [
 cardArray.sort(() => 0.5 - Math.random());
 console.log(cardArray);
 
-const gradDisplay = document.querySelector('#grid');
+const gridDisplay = document.querySelector('#grid');
 
 function createBoard () {
   for (let i = 0; i < cardArray.length; i++) {
@@ -60,13 +60,16 @@ function createBoard () {
     card.setAttribute('src', 'img/blank.png');
     card.setAttribute('data-id', i);
     card.addEventListener('click', flipCard);
-    gradDisplay.appendChild(card);
+    gridDisplay.appendChild(card);
   }
 }
 
-createBoard()
+createBoard();
+
+
 let chosenCards = [];
 let chosenIds = [];
+let wonIds = [];
 
 function checkMatch () {
   const cards = document.querySelectorAll('img');
@@ -76,13 +79,16 @@ function checkMatch () {
   if(chosenCards[0] === chosenCards[1]) {
     cards[firstOption].setAttribute('src', 'img/white.png');
     cards[secondOption].setAttribute('src', 'img/white.png');
-    cards[firstOption].removeEventListener('click', flipCard)
-    cards[secondOption].removeEventListener('click', flipCard)
+    cards[firstOption].removeEventListener('click', flipCard);
+    cards[secondOption].removeEventListener('click', flipCard);
+    wonIds.push(chosenCards);
+    result.innerHTML = wonIds.length;
+
   } else {
     cards[firstOption].setAttribute('src', 'img/blank.png');
     cards[secondOption].setAttribute('src', 'img/blank.png');
   }
-
+  
   chosenCards = [];
   chosenIds = [];
 }
@@ -92,8 +98,22 @@ function flipCard() {
   this.setAttribute('src', cardArray[cardId].img);
   chosenCards.push(this.getAttribute('src'));
   chosenIds.push(cardId);
-  console.log(chosenCards)
+  
   if(chosenCards.length === 2) {
     setTimeout(checkMatch, 500);
   }
+}
+ 
+const result = document.querySelector('#result');
+
+const refreshBtn = document.getElementById('refresh');
+refreshBtn.addEventListener('click', refreshGame);
+
+function refreshGame () {
+  cardArray.sort(() => 0.5 - Math.random());
+  const cards = document.querySelectorAll('img');
+  cards.forEach(card => card.setAttribute('src', 'img/blank.png'));
+  cards.forEach(card => card.addEventListener('click', flipCard));
+  wonIds = [];
+  result.innerHTML = 0;
 }
