@@ -54,6 +54,12 @@ console.log(cardArray);
 
 const gradDisplay = document.querySelector('#grid');
 
+function refreshGame () {
+ 
+  cardArray.sort(() => 0.5 - Math.random());
+  create board();
+  }
+
 function createBoard () {
   for (let i = 0; i < cardArray.length; i++) {
     const card = document.createElement('img');
@@ -65,6 +71,10 @@ function createBoard () {
 }
 
 createBoard()
+
+const refreshBtn = document.querySelector('#refresh');
+refreshBtn.addEventListener('click', refreshGame);
+
 let chosenCards = [];
 let chosenIds = [];
 
