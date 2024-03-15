@@ -5,12 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Game</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Princess+Sofia:regular" rel="stylesheet" />
 </head>
 <body>
-  <div class="game-container">
-    <h3>Score: <span id="result">0</span></h3>
-    <div id="grid"></div>
-    <button id="refresh">Refresh</button>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__container">
+        <h1 class="header__tittle tittle">Memoria</h1>
+        <div class="header__buttons">
+          <button id="refresh" class="header__btn btn">Restart</button>
+          <button id="levels" class="header__btn btn">Level</button>
+        </div>
+      </div>
+    </header>
+    <div class="game-container">
+      <div id="grid"></div>
+      <h3>Score: <span id="result">0</span></h3>
+    </div>
   </div>
 
   <script src="app.js"></script>
