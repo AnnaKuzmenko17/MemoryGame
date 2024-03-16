@@ -14,13 +14,17 @@
         <h1 class="header__tittle tittle">Memoria</h1>
         <div class="header__buttons">
           <button id="refresh" class="header__btn btn">Restart</button>
-          <button id="levels" class="header__btn btn">Level</button>
+          <button id="start" class="header__btn btn">Start</button>
+          <button class="header__btn dark-mode"><img src="img/dark.png" alt=""></button>
         </div>
       </div>
     </header>
     <div class="game-container">
       <div id="grid"></div>
-      <h3>Score: <span id="result">0</span></h3>
+    </div>
+    <div class="indicators">
+      <h3 class="stopwatch__indicator indicator">Tempo: <span class="time">00:00</span></h3>
+      <h3 class="moves__indicator indicator">Moves: <span class="moves"></span></h3>
     </div>
   </div>
 

@@ -6,14 +6,21 @@
 body {
   font-family: 'Princess Sofia';
 }
+
 .wrapper {
   padding: 15px;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 40px;
 }
+
+.wrapper.dark {
+  background-color: #333333;
+}
+
 .header {
 
 }
@@ -27,6 +34,7 @@ body {
 }
 
 .header__buttons {
+  align-items: center;
   display: flex;
   gap: 20px;
 }
@@ -40,6 +48,20 @@ body {
 
 }
 
+.tittle.dark {
+  color: #fefefe;
+}
+
+.dark-mode {
+  border: none;
+  background-color: #fff;
+}
+.dark-mode img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+
+}
 .btn {
   border: 0;
   font-family: inherit;
@@ -53,9 +75,18 @@ body {
   color: #75728d;
 }
 
+.btn.dark {
+  color: #c40909;
+}
+
 .header__btn:nth-child(2) {
   background-color: #75728d;
   color: #e4cbcb;
+}
+
+.btn.dark:nth-child(2) {
+  background-color: #c40909;
+  color: #eef2f1;
 }
 
 #grid {
@@ -102,10 +133,42 @@ body {
   opacity: 0;
 }
 
+.indicators {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.indicator {
+  text-align: center;
+  border-radius: 30px;
+  width: 131px;
+  height: 30px;
+  background-color: #e4cbcb;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: #75728d;
+}
+
+.indicator.dark {
+  background-color: #ffffff;
+  color: #c40909;
+}
+
 
 @media (max-width: 776.98px) {
+  
+  #grid {
+    width: 330px;
+    height: 660px;
+  }
+}
+
+@media (max-width: 991.98px) {
   .header__container {
     flex-direction: column;
     gap: 20px;
   }
+ 
 }
