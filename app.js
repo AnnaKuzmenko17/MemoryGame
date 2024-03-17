@@ -146,6 +146,7 @@ function startGame () {
   refreshBtn.classList.remove('hidden');
   startBtn.classList.add('hidden');
   darkBtn.classList.add('hidden');
+  lightBtn.classList.add('hidden');
   const cards = document.querySelectorAll('#card');
   cards.forEach((card) => {
     card.addEventListener('click', flipCard)
@@ -161,6 +162,7 @@ const darkBtn = document.querySelector('.dark-mode');
 const lightBtn = document.querySelector('.light-mode')
 darkBtn.addEventListener('click', darkOn);
 lightBtn.addEventListener('click', lightOn);
+let dark = false;
 
 
 function darkOn() {
@@ -176,6 +178,7 @@ function darkOn() {
   cards.forEach((card, i) => {
     card.setAttribute('src', cardArray[i].dark)
   }) 
+  dark = true;
 }
 
 function lightOn() {
@@ -191,6 +194,7 @@ function lightOn() {
   cards.forEach((card, i) => {
     card.setAttribute('src', cardArray[i].img)
   }) 
+  dark = false;
 }
 
 function flipCard() {
@@ -219,7 +223,12 @@ function refreshGame () {
 
   refreshBtn.classList.add('hidden');
   startBtn.classList.remove('hidden');
-  darkBtn.classList.remove('hidden');
+
+  if(dark) {
+    lightBtn.classList.remove('hidden');
+  } else {
+    darkBtn.classList.remove('hidden');
+  }
   
   darkBtn.addEventListener('click', darkOn);
   startBtn.addEventListener('click', startGame);
@@ -233,10 +242,10 @@ function refreshGame () {
     cards[i].setAttribute('class', 'transparent');
     cards[i].setAttribute('data-id', i);
     cards[i].setAttribute('src', cardArray[i].img);
+    cards[i].removeEventListener('click', flipCard)
   };
   moves = [];
   stopStopWatch();
-  time
   console.log(cardArray);
 }
 
