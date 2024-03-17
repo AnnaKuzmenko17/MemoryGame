@@ -72,3 +72,38 @@
   }
  
 }
+#start {
+  position: relative;
+}
+.levels {
+  position: absolute;
+  top: 86px;
+  right: 15px;
+  width: 166px;
+  height: 200px;
+  background-color: $white;
+  color: $grey;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  &__tittle {
+    padding-left: 20px;
+  }
+  
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+.level__btn {
+  background-color: $light-pink;
+}
+.btn {
+}

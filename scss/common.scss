@@ -14,16 +14,20 @@ body {
 }
 
 .wrapper {
-  width: 100vw;
-  min-height: 100vh;
+  min-width: 100vw;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  justify-content: space-around;
 }
 
 .wrapper.dark {
   background-color: #333333;
+}
+
+.wrapper.grey {
+  background-color: $basis;
 }
 
 [class*="__container"] {
