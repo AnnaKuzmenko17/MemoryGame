@@ -143,29 +143,54 @@ const startBtn = document.querySelector('#start');
 startBtn.addEventListener('click', startGame);
 
 function startGame () {
+  refreshBtn.classList.remove('hidden');
+  startBtn.classList.add('hidden');
+  darkBtn.classList.add('hidden');
   const cards = document.querySelectorAll('#card');
   cards.forEach((card) => {
     card.addEventListener('click', flipCard)
   });
-  stopWatch();
+
+  restartStopWatch();
+
   darkBtn.removeEventListener('click', darkOn);
   startBtn.removeEventListener('click', startGame);
 }
 
 const darkBtn = document.querySelector('.dark-mode');
+const lightBtn = document.querySelector('.light-mode')
 darkBtn.addEventListener('click', darkOn);
+lightBtn.addEventListener('click', lightOn);
+
 
 function darkOn() {
+  darkBtn.classList.add('hidden');
+  lightBtn.classList.remove('hidden');
+
   document.querySelector('.wrapper').classList.toggle('dark');
   document.querySelectorAll('.header__btn').forEach(btn => btn.classList.toggle('dark'));
   document.querySelector('.tittle').classList.toggle('dark');
   document.querySelectorAll('.indicator').forEach(indicator => indicator.classList.toggle('dark'));
+  const cards = document.querySelectorAll('img.transparent');
+
+  cards.forEach((card, i) => {
+    card.setAttribute('src', cardArray[i].dark)
+  }) 
+}
+
+function lightOn() {
+  lightBtn.classList.add('hidden');
+  darkBtn.classList.remove('hidden');
+
+  document.querySelector('.wrapper').classList.remove('dark');
+  document.querySelectorAll('.header__btn').forEach(btn => btn.classList.remove('dark'));
+  document.querySelector('.tittle').classList.remove('dark');
+  document.querySelectorAll('.indicator').forEach(indicator => indicator.classList.remove('dark'));
 
   const cards = document.querySelectorAll('img.transparent');
   cards.forEach((card, i) => {
-    card.setAttribute('src', cardArray[i].dark)
-  })
-  console.log(cards);
+    card.setAttribute('src', cardArray[i].img)
+  }) 
 }
 
 function flipCard() {
@@ -191,9 +216,10 @@ refreshBtn.addEventListener('click', refreshGame);
 
 function refreshGame () {
   const cards = document.querySelectorAll('#card');
-  cards.forEach((card) => {
-    card.removeEventListener('click', flipCard)
-  });
+
+  refreshBtn.classList.add('hidden');
+  startBtn.classList.remove('hidden');
+  darkBtn.classList.remove('hidden');
   
   darkBtn.addEventListener('click', darkOn);
   startBtn.addEventListener('click', startGame);
@@ -209,9 +235,8 @@ function refreshGame () {
     cards[i].setAttribute('src', cardArray[i].img);
   };
   moves = [];
-  min = 0;
-  sec = 0;
-  count = 0;
+  stopStopWatch();
+  time
   console.log(cardArray);
 }
 
@@ -221,28 +246,48 @@ let min = 0;
 let sec = 0;
 let count = 0;
 
-function stopWatch () {
-  count++;
-  if (count === 100) {
-    sec++;
-    count = 0;
-  } 
-  if (sec == 60) {
+function renderTime () {
+  sec++;
+
+  if (sec > 59) {
     min++;
     sec = 0;
   }
-
+  
   let minString; 
   let secString; 
   minString = min;
   secString = sec;
+
   if (min < 10) {
     minString = '0' + min;
   }
+
   if (sec < 10) {
     secString = '0' + sec;
   }
+
   time.innerHTML = minString + ':' + secString;
   console.log(minString);
-  setTimeout(stopWatch, 10);
+}
+
+let timerInterval;
+
+function startStopWatch () {
+  if(timerInterval == null) {
+    timerInterval = setInterval(renderTime, 1000)
+  }
+}
+
+function stopStopWatch () {
+  clearInterval(timerInterval);
+  timerInterval = undefined;
+  sec = 0;
+  min = 0;
+  time.innerHTML = '00:00';
+}
+
+function restartStopWatch () {
+  stopStopWatch();
+  startStopWatch();
 }

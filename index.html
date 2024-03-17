@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Game</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Memoria</title>
+  <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css?family=Princess+Sofia:regular" rel="stylesheet" />
 </head>
 <body>
@@ -13,19 +13,24 @@
       <div class="header__container">
         <h1 class="header__tittle tittle">Memoria</h1>
         <div class="header__buttons">
-          <button id="refresh" class="header__btn btn">Restart</button>
+          <button id="refresh" class="header__btn btn hidden">Restart</button>
           <button id="start" class="header__btn btn">Start</button>
-          <button class="header__btn dark-mode"><img src="img/dark.png" alt=""></button>
+          <button class="header__btn dark-mode"><img id="dark-mode" src="img/dark.png" alt="dark-mode-icon"></button>
+          <button class="header__btn light-mode hidden"><img id="dark-mode" src="img/light.png" alt="light-mode-icon"></button>
         </div>
       </div>
     </header>
-    <div class="game-container">
-      <div id="grid"></div>
-    </div>
-    <div class="indicators">
-      <h3 class="stopwatch__indicator indicator">Tempo: <span class="time">00:00</span></h3>
-      <h3 class="moves__indicator indicator">Moves: <span class="moves"></span></h3>
-    </div>
+    <section class="game">
+      <div class="game__container">
+        <div id="grid"></div>
+      </div>
+    </section>
+    <section class="indicators">
+      <div class="indicators__container">
+        <h3 class="stopwatch__indicator indicator">Time: <span class="time">00:00</span></h3>
+        <h3 class="moves__indicator indicator">Moves: <span class="moves"></span></h3>
+      </div>
+    </section>
   </div>
 
   <script src="app.js"></script>

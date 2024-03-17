@@ -1,0 +1,22 @@
+.indicators__container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.indicator {
+  text-align: center;
+  border-radius: 30px;
+  width: 131px;
+  height: 30px;
+  background-color: #e4cbcb;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: #75728d;
+}
+
+.indicator.dark {
+  background-color: #ffffff;
+  color: #c40909;
+}

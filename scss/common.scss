@@ -1,0 +1,52 @@
+$red: #c40909;
+$dark: #333333;
+$dark-pink: #f18b8b;
+$light-pink: #e4cbcb;
+$white: #ffffff;
+$grey: #75728d;
+$light: #eef2f1;
+$basis: #f1f1f1;
+$check: #f18b8b;
+
+body {
+  font-family: "Princess Sofia", sans-serif;
+  font-weight: 400;
+}
+
+.wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.wrapper.dark {
+  background-color: #333333;
+}
+
+[class*="__container"] {
+  max-width: 1216px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+@media (max-width: 991.98px) {
+  [class*="__container"] {
+    max-width: 750px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  [class*="__container"] {
+    max-width: none;
+    padding: 10px;
+  }
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
