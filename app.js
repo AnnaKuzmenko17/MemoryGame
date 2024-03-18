@@ -1,127 +1,25 @@
-const cardArray = [
-  {
-    id: 1,
-    name: 'princess-1',
-    img: 'img/princess-1.png',
-    dark: 'img/dark-1.png'
-  },
-  {
-    id: 2,
-    name: 'princess-2',
-    img: 'img/princess-2.png',
-    dark: 'img/dark-2.png'
-  },
-  {
-    id: 3,
-    name: 'princess-3',
-    img: 'img/princess-3.png',
-    dark: 'img/dark-3.png'
-  },
-  {
-    id: 4,
-    name: 'princess-4',
-    img: 'img/princess-4.png',
-    dark: 'img/dark-4.png'
-  },
-  {
-    id: 5,
-    name: 'princess-5',
-    img: 'img/princess-5.png',
-    dark: 'img/dark-5.png'
-  },
-  {
-    id: 6,
-    name: 'princess-6',
-    img: 'img/princess-6.png',
-    dark: 'img/dark-6.png'
-  },
-  {
-    id: 7,
-    name: 'princess-7',
-    img: 'img/princess-7.png',
-    dark: 'img/dark-7.png'
-  },
-  {
-    id: 8,
-    name: 'princess-8',
-    img: 'img/princess-8.png',
-    dark: 'img/dark-8.png'
-  },
-  {
-    id: 9,
-    name: 'princess-9',
-    img: 'img/princess-9.png',
-    dark: 'img/dark-9.png'
-  },
-  {
-    id: 1,
-    name: 'princess-1',
-    img: 'img/princess-1.png',
-    dark: 'img/dark-1.png'
-  },
-  {
-    id: 2,
-    name: 'princess-2',
-    img: 'img/princess-2.png',
-    dark: 'img/dark-2.png'
-  },
-  {
-    id: 3,
-    name: 'princess-3',
-    img: 'img/princess-3.png',
-    dark: 'img/dark-3.png'
-  },
-  {
-    id: 4,
-    name: 'princess-4',
-    img: 'img/princess-4.png',
-    dark: 'img/dark-4.png'
-  },
-  {
-    id: 5,
-    name: 'princess-5',
-    img: 'img/princess-5.png',
-    dark: 'img/dark-5.png'
-  },
-  {
-    id: 6,
-    name: 'princess-6',
-    img: 'img/princess-6.png',
-    dark: 'img/dark-6.png'
-  },
-  {
-    id: 7,
-    name: 'princess-7',
-    img: 'img/princess-7.png',
-    dark: 'img/dark-7.png'
-  },
-  {
-    id: 8,
-    name: 'princess-8',
-    img: 'img/princess-8.png',
-    dark: 'img/dark-8.png'
-  },
-  {
-    id: 9,
-    name: 'princess-9',
-    img: 'img/princess-9.png',
-    dark: 'img/dark-9.png'
-  },
-]
+import { cardArray } from "./js/cardArray.js";
 
-cardArray.sort(() => 0.5 - Math.random());
-console.log(cardArray);
+let newArray;
 
-const gridDisplay = document.querySelector('#grid');
+newArray = [...cardArray].sort(() => 0.5 - Math.random());
 
+const gameContainer = document.querySelector('.game__container');
+const gridDisplay = document.getElementById('grid');
 
-function createBoard () {
-  for (let i = 0; i < cardArray.length; i++) {
+console.log(newArray)
+
+function createBoard() {
+  const gridDisplay = document.createElement('div');
+  gridDisplay.setAttribute('id', 'grid');
+  gameContainer.appendChild(gridDisplay);
+
+  for (let i = 0; i < newArray.length; i++) {
     const base = document.createElement('div');
     const img = document.createElement('img');
     base.setAttribute('data-id', i);
     img.setAttribute('data-id', i);
-    img.setAttribute('src', cardArray[i].img);
+    img.setAttribute('src', newArray[i].img);
     img.classList.add('transparent');
     img.setAttribute('id', 'card');
     gridDisplay.appendChild(base);
@@ -135,24 +33,29 @@ createBoard();
 let chosenCards = [];
 let chosenIds = [];
 let moves = [];
+let wonIds = [];
 
-function checkMatch () {
+function checkMatch() {
+  const gridDisplay = document.getElementById('grid');
   const cards = document.querySelectorAll('#card');
   const bases = gridDisplay.children;
   let firstOption = chosenIds[0];
   let secondOption = chosenIds[1];
-  
-  if(chosenCards[0] === chosenCards[1]) {
+
+  if (chosenCards[0] === chosenCards[1]) {
     bases[firstOption].setAttribute('class', 'match');
     bases[secondOption].setAttribute('class', 'match');
     cards[firstOption].removeEventListener('click', flipCard);
     cards[secondOption].removeEventListener('click', flipCard);
-    
+    wonIds.push(...chosenIds);
+    checkWin();
+    console.log(wonIds);
+
   } else {
     cards[firstOption].setAttribute('class', 'transparent');
     cards[secondOption].setAttribute('class', 'transparent');
   }
-  
+
   chosenCards = [];
   chosenIds = [];
   console.log(chosenCards, chosenIds, cards)
@@ -160,31 +63,40 @@ function checkMatch () {
 
 const startBtn = document.querySelector('#start');
 const levelsBtn = document.querySelector('#levels');
+
 levelsBtn.addEventListener('click', showLevels);
+let level;
 
-function showLevels () {
-  if(dark) {
-    lightBtn.classList.toggle('hidden');
-  } else {
-    darkBtn.classList.toggle('hidden');
-  }  
-  document.querySelector('.levels__buttons').classList.toggle('hidden');
-}
+document.querySelector('#three').addEventListener('click', () => {
+  newArray = [...cardArray].sort((a, b) => a.id - b.id).slice(12).sort(() => 0.5 - Math.random());
+  document.querySelector('#grid').remove();
+  createBoard();
+  console.log(newArray)
+});
 
-// function chooseLevel (level) {
-//   if (level === 3) {
-//     cardArray.sort((a,b) => a.id-b.id).splice(6);
-//   } else if (level === 6) {
-//     cardArray.sort((a, b) => a.id-b.id).splice(12);
-//   } 
-// }
+document.querySelector('#six').addEventListener('click', () => {
+  newArray = [...cardArray].sort((a, b) => a.id - b.id).slice(6).sort(() => 0.5 - Math.random());
+  document.querySelector('#grid').remove();
+  createBoard();
+  console.log(newArray)
+});
+
+document.querySelector('#nine').addEventListener('click', () => {
+  newArray = [...cardArray].sort(() => 0.5 - Math.random());
+  document.querySelector('#grid').remove();
+  createBoard();
+  console.log(newArray)
+});
+
 startBtn.addEventListener('click', startGame);
 
-function startGame () {
+function startGame() {
   refreshBtn.classList.remove('hidden');
   startBtn.classList.add('hidden');
   darkBtn.classList.add('hidden');
   lightBtn.classList.add('hidden');
+  levelsBtn.classList.add('hidden');
+
   const cards = document.querySelectorAll('#card');
   cards.forEach((card) => {
     card.addEventListener('click', flipCard)
@@ -202,6 +114,14 @@ darkBtn.addEventListener('click', darkOn);
 lightBtn.addEventListener('click', lightOn);
 let dark = false;
 
+function showLevels() {
+  if (dark) {
+    lightBtn.classList.toggle('hidden');
+  } else {
+    darkBtn.classList.toggle('hidden');
+  }
+  document.querySelector('.levels__buttons').classList.toggle('hidden');
+}
 
 function darkOn() {
   darkBtn.classList.add('hidden');
@@ -214,8 +134,8 @@ function darkOn() {
   const cards = document.querySelectorAll('img.transparent');
 
   cards.forEach((card, i) => {
-    card.setAttribute('src', cardArray[i].dark)
-  }) 
+    card.setAttribute('src', newArray[i].dark)
+  })
   dark = true;
 }
 
@@ -230,8 +150,8 @@ function lightOn() {
 
   const cards = document.querySelectorAll('img.transparent');
   cards.forEach((card, i) => {
-    card.setAttribute('src', cardArray[i].img)
-  }) 
+    card.setAttribute('src', newArray[i].img)
+  })
   dark = false;
 }
 
@@ -239,70 +159,85 @@ function flipCard() {
   const bases = grid.children;
   const btnId = this.getAttribute('data-id');
   this.classList.remove('transparent');
-  
-  chosenCards.push(cardArray[btnId].img);
+
+  chosenCards.push(newArray[btnId].img);
   chosenIds.push(btnId);
   moves.push(btnId);
-  
-  if(chosenCards.length === 2) {
+
+  if (chosenCards.length === 2) {
     setTimeout(checkMatch, 300);
-    movesIndicator.innerHTML = moves.length;
+    movesIndicator.forEach(x => x.innerHTML = moves.length);
   }
 }
 
-const movesIndicator = document.querySelector('.moves');
-movesIndicator.innerHTML = moves.length;
+const movesIndicator = document.querySelectorAll('.moves');
+movesIndicator.forEach(x => x.innerHTML = moves.length);
 
 const refreshBtn = document.getElementById('refresh');
 refreshBtn.addEventListener('click', refreshGame);
 
-function refreshGame () {
+function refreshGame() {
   const cards = document.querySelectorAll('#card');
 
   refreshBtn.classList.add('hidden');
   startBtn.classList.remove('hidden');
+  levelsBtn.classList.remove('hidden');
 
-  if(dark) {
+
+  if (dark) {
     lightBtn.classList.remove('hidden');
   } else {
     darkBtn.classList.remove('hidden');
   }
-  
+
   darkBtn.addEventListener('click', darkOn);
   startBtn.addEventListener('click', startGame);
 
-  cardArray.sort(() => 0.5 - Math.random());
+  newArray.sort(() => 0.5 - Math.random());
 
   const bases = document.querySelector('#grid').children;
- 
-  for (let i = 0; i < cardArray.length; i++) {
+
+  for (let i = 0; i < newArray.length; i++) {
     bases[i].className = '';
     cards[i].setAttribute('class', 'transparent');
     cards[i].setAttribute('data-id', i);
-    cards[i].setAttribute('src', cardArray[i].img);
+    cards[i].setAttribute('src', newArray[i].img);
     cards[i].removeEventListener('click', flipCard)
   };
   moves = [];
   stopStopWatch();
-  console.log(cardArray);
+  console.log(newArray);
 }
 
-const time = document.querySelector('.time');
+function checkWin () {
+  if (wonIds.length === newArray.length) {
+    finishGame();
+  }
+}
+
+function finishGame () {
+  document.querySelector('.congrats').classList.remove('hidden');
+  clearInterval(timerInterval);
+  timerInterval = undefined;
+
+}
+
+const time = document.querySelectorAll('.time');
 
 let min = 0;
 let sec = 0;
 let count = 0;
 
-function renderTime () {
+function renderTime() {
   sec++;
 
   if (sec > 59) {
     min++;
     sec = 0;
   }
-  
-  let minString; 
-  let secString; 
+
+  let minString;
+  let secString;
   minString = min;
   secString = sec;
 
@@ -314,19 +249,19 @@ function renderTime () {
     secString = '0' + sec;
   }
 
-  time.innerHTML = minString + ':' + secString;
+  time.forEach(item => item.innerHTML = minString + ':' + secString);
   console.log(minString);
 }
 
 let timerInterval;
 
-function startStopWatch () {
-  if(timerInterval == null) {
+function startStopWatch() {
+  if (timerInterval == null) {
     timerInterval = setInterval(renderTime, 1000)
   }
 }
 
-function stopStopWatch () {
+function stopStopWatch() {
   clearInterval(timerInterval);
   timerInterval = undefined;
   sec = 0;
@@ -334,7 +269,7 @@ function stopStopWatch () {
   time.innerHTML = '00:00';
 }
 
-function restartStopWatch () {
+function restartStopWatch() {
   stopStopWatch();
   startStopWatch();
 }

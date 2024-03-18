@@ -189,6 +189,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  z-index: 10;
 }
 
 .levels__buttons {
@@ -294,6 +295,32 @@ body {
 .indicator.dark {
   background-color: #ffffff;
   color: #c40909;
+}
+
+.congrats__container {
+  width: 60%;
+  height: 30%;
+  border-radius: 30px;
+  z-index: 20;
+  position: absolute;
+  top: 35%;
+  right: 20%;
+  background-color: #ffffff;
+  border: 2px solid #aeadbd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.congrats__tittle {
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.congrats__btn {
+  background-color: #aeadbd;
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=styles.css.map */
