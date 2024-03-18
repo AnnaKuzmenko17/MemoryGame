@@ -4,6 +4,7 @@ $dark-pink: #f18b8b;
 $light-pink: #e4cbcb;
 $white: #ffffff;
 $grey: #75728d;
+$light-grey: #aeadbd;
 $light: #eef2f1;
 $basis: #f1f1f1;
 $check: #f18b8b;
@@ -36,9 +37,17 @@ body {
   padding: 15px;
 }
 
+@media (max-width: 1350.98px) {
+  [class*="__container"] {
+    max-width: 900px;
+    padding: 15px;
+  }
+}
+
 @media (max-width: 991.98px) {
   [class*="__container"] {
     max-width: 750px;
+    padding: 10px;
   }
 }
 

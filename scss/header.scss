@@ -1,7 +1,6 @@
 .header {
   width: 100%;
   &__container {
-    margin: 0 auto;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,6 +11,7 @@
     align-items: center;
     display: flex;
     gap: 20px;
+    position: relative;
   }
 }
 
@@ -69,41 +69,80 @@
   .header__container {
     flex-direction: column;
     gap: 20px;
-  }
- 
-}
-#start {
-  position: relative;
-}
-.levels {
-  position: absolute;
-  top: 86px;
-  right: 15px;
-  width: 166px;
-  height: 200px;
-  background-color: $white;
-  color: $grey;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-
-  &__tittle {
-    padding-left: 20px;
-  }
-  
-
-  &__buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: space-around;
     align-items: center;
   }
+
 }
+
+
+// .levels__buttons {
+//   width: 166px;
+//   height: 200px;
+//   background-color: $white;
+//   color: $grey;
+//   border-radius: 20px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   gap: 5px;
+
+  // &__tittle {
+  //   padding-left: 20px;
+  // }
+  
+
+  // &__buttons {
+  //   display: flex;
+  //   flex-direction: column;
+  //   gap: 20px;
+  //   justify-content: space-around;
+  //   align-items: center;
+  // }
+// }
 .level__btn {
   background-color: $light-pink;
 }
 .btn {
+}
+
+.levels__buttons {
+  position: absolute;
+  top: 140%;
+  right: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+}
+.levels__btn {
+  
+}
+.btn {
+}
+.levels__buttons {
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: $light-pink;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 10px 15px 10px;
+    border-color: transparent transparent $light-pink transparent;
+    transform: rotate(0deg);
+  }
+}
+.level__btn {
+  background-color: $light;
+  &:hover {
+    background-color: $grey;
+    color: $white;
+  }
 }

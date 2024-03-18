@@ -159,13 +159,17 @@ function checkMatch () {
 }
 
 const startBtn = document.querySelector('#start');
-// startBtn.addEventListener('click', showLevels);
+const levelsBtn = document.querySelector('#levels');
+levelsBtn.addEventListener('click', showLevels);
 
-// function showLevels () {
-//   darkBtn.classList.toggle('hidden');
-//   document.querySelector('.levels').classList.toggle('hidden');
-//   document.querySelector('.wrapper').classList.toggle('grey');
-// }
+function showLevels () {
+  if(dark) {
+    lightBtn.classList.toggle('hidden');
+  } else {
+    darkBtn.classList.toggle('hidden');
+  }  
+  document.querySelector('.levels__buttons').classList.toggle('hidden');
+}
 
 // function chooseLevel (level) {
 //   if (level === 3) {
