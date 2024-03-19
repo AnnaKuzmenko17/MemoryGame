@@ -1,13 +1,35 @@
 import { cardArray } from "./js/cardArray.js";
 
-let newArray;
-
-newArray = [...cardArray].sort(() => 0.5 - Math.random());
-
 const gameContainer = document.querySelector('.game__container');
 const gridDisplay = document.getElementById('grid');
+const darkBtn = document.querySelector('.dark-mode');
+const lightBtn = document.querySelector('.light-mode')
+const restartBtn = document.getElementById('restart');
+const startBtn = document.querySelector('#start');
+const levelsBtn = document.querySelector('#levels');
+const movesIndicator = document.querySelectorAll('.moves');
+const time = document.querySelectorAll('.time');
+const cards = document.querySelectorAll('#card');
 
-console.log(newArray)
+
+let min = 0;
+let sec = 0;
+let dark = false;
+let newArray;
+let chosenCards = [];
+let chosenIds = [];
+let moves = [];
+let wonIds = [];
+let timerInterval;
+
+levelsBtn.addEventListener('click', showLevels);
+startBtn.addEventListener('click', startGame);
+restartBtn.addEventListener('click', restartGame);
+darkBtn.addEventListener('click', darkOn);
+lightBtn.addEventListener('click', lightOn);
+
+newArray = [...cardArray].sort(() => 0.5 - Math.random());
+createBoard();
 
 function createBoard() {
   const gridDisplay = document.createElement('div');
@@ -19,26 +41,43 @@ function createBoard() {
     const img = document.createElement('img');
     base.setAttribute('data-id', i);
     img.setAttribute('data-id', i);
-    img.setAttribute('src', newArray[i].img);
-    img.classList.add('transparent');
     img.setAttribute('id', 'card');
+    img.classList.add('transparent');
     gridDisplay.appendChild(base);
     base.appendChild(img);
   }
+
+  setImages();
 }
 
-createBoard();
+function showEl (el) {
+  el.classList.remove('hidden')
+}
 
+function hiddenEl (el) {
+  el.classList.add('hidden');
+}
 
-let chosenCards = [];
-let chosenIds = [];
-let moves = [];
-let wonIds = [];
+function hiddenThemeBtn () {
+    hiddenEl(lightBtn);
+    hiddenEl(darkBtn);
+}
+
+function showThemeBtn () {
+  if (dark) {
+    showEl(lightBtn);
+    hiddenEl(darkBtn);
+  } else {
+    showEl(darkBtn);
+    hiddenEl(lightBtn);
+  }
+}
 
 function checkMatch() {
   const gridDisplay = document.getElementById('grid');
   const cards = document.querySelectorAll('#card');
   const bases = gridDisplay.children;
+
   let firstOption = chosenIds[0];
   let secondOption = chosenIds[1];
 
@@ -49,8 +88,6 @@ function checkMatch() {
     cards[secondOption].removeEventListener('click', flipCard);
     wonIds.push(...chosenIds);
     checkWin();
-    console.log(wonIds);
-
   } else {
     cards[firstOption].setAttribute('class', 'transparent');
     cards[secondOption].setAttribute('class', 'transparent');
@@ -58,105 +95,115 @@ function checkMatch() {
 
   chosenCards = [];
   chosenIds = [];
-  console.log(chosenCards, chosenIds, cards)
 }
 
-const startBtn = document.querySelector('#start');
-const levelsBtn = document.querySelector('#levels');
+const threeBtn = document.querySelector('#three');
+const sixBtn = document.querySelector('#six');
+const nineBtn = document.querySelector('#nine');
 
-levelsBtn.addEventListener('click', showLevels);
-let level;
+threeBtn.addEventListener('click', function() {
+  changeLevel(3);
+  hiddenThemeBtn();
+}, false);
 
-document.querySelector('#three').addEventListener('click', () => {
-  newArray = [...cardArray].sort((a, b) => a.id - b.id).slice(12).sort(() => 0.5 - Math.random());
-  document.querySelector('#grid').remove();
-  createBoard();
-  console.log(newArray)
-});
+sixBtn.addEventListener('click', function() {
+  changeLevel(6);
+  hiddenThemeBtn();
+}, false);
 
-document.querySelector('#six').addEventListener('click', () => {
-  newArray = [...cardArray].sort((a, b) => a.id - b.id).slice(6).sort(() => 0.5 - Math.random());
-  document.querySelector('#grid').remove();
-  createBoard();
-  console.log(newArray)
-});
+nineBtn.addEventListener('click', () => {
+  const levelOptions = document.querySelector('.levels__buttons');
 
-document.querySelector('#nine').addEventListener('click', () => {
   newArray = [...cardArray].sort(() => 0.5 - Math.random());
   document.querySelector('#grid').remove();
+  startBtn.addEventListener('click', startGame);
+  hiddenEl(levelOptions);
   createBoard();
-  console.log(newArray)
+  hiddenThemeBtn();
 });
 
-startBtn.addEventListener('click', startGame);
+function changeLevel (level) {
+  const levelOptions = document.querySelector('.levels__buttons');
+  startBtn.addEventListener('click', startGame);
+
+  let index = cardArray.length - level * 2;
+
+  newArray = [...cardArray].sort((a, b) => a.id - b.id).slice(index).sort(() => 0.5 - Math.random());
+  document.querySelector('#grid').remove();
+  createBoard();
+  hiddenEl(levelOptions);
+  hiddenThemeBtn();
+
+}
+
 
 function startGame() {
-  refreshBtn.classList.remove('hidden');
-  startBtn.classList.add('hidden');
-  darkBtn.classList.add('hidden');
-  lightBtn.classList.add('hidden');
-  levelsBtn.classList.add('hidden');
-
   const cards = document.querySelectorAll('#card');
+
   cards.forEach((card) => {
     card.addEventListener('click', flipCard)
   });
 
+  showEl(restartBtn);
+  hiddenEl(startBtn);
+  hiddenEl(levelsBtn)
+  hiddenThemeBtn();
   restartStopWatch();
-
-  darkBtn.removeEventListener('click', darkOn);
-  startBtn.removeEventListener('click', startGame);
 }
 
-const darkBtn = document.querySelector('.dark-mode');
-const lightBtn = document.querySelector('.light-mode')
-darkBtn.addEventListener('click', darkOn);
-lightBtn.addEventListener('click', lightOn);
-let dark = false;
 
 function showLevels() {
-  if (dark) {
-    lightBtn.classList.toggle('hidden');
-  } else {
-    darkBtn.classList.toggle('hidden');
-  }
-  document.querySelector('.levels__buttons').classList.toggle('hidden');
+  const levelOptions = document.querySelector('.levels__buttons');
+  startBtn.removeEventListener('click', startGame);
+  hiddenThemeBtn();
+  showEl(levelOptions);
 }
 
-function darkOn() {
-  darkBtn.classList.add('hidden');
-  lightBtn.classList.remove('hidden');
-
-  document.querySelector('.wrapper').classList.toggle('dark');
-  document.querySelectorAll('.header__btn').forEach(btn => btn.classList.toggle('dark'));
-  document.querySelector('.tittle').classList.toggle('dark');
-  document.querySelectorAll('.indicator').forEach(indicator => indicator.classList.toggle('dark'));
-  const cards = document.querySelectorAll('img.transparent');
-
-  cards.forEach((card, i) => {
-    card.setAttribute('src', newArray[i].dark)
-  })
-  dark = true;
+function styleDarkMode () {
+  document.querySelector('.wrapper').classList.add('dark');
+  document.querySelectorAll('.header__btn').forEach(btn => btn.classList.add('dark'));
+  document.querySelector('.tittle').classList.add('dark');
+  document.querySelectorAll('.indicator').forEach(indicator => indicator.classList.add('dark'));
 }
 
-function lightOn() {
-  lightBtn.classList.add('hidden');
-  darkBtn.classList.remove('hidden');
-
+function styleLightMode () {
   document.querySelector('.wrapper').classList.remove('dark');
   document.querySelectorAll('.header__btn').forEach(btn => btn.classList.remove('dark'));
   document.querySelector('.tittle').classList.remove('dark');
   document.querySelectorAll('.indicator').forEach(indicator => indicator.classList.remove('dark'));
+}
 
+function setImages () {
   const cards = document.querySelectorAll('img.transparent');
-  cards.forEach((card, i) => {
-    card.setAttribute('src', newArray[i].img)
-  })
+  
+  if (dark) {
+    cards.forEach((card, i) => {
+      card.setAttribute('src', newArray[i].dark)
+    })
+  } else {
+    cards.forEach((card, i) => {
+      card.setAttribute('src', newArray[i].img)
+    })
+  }
+}
+
+function darkOn() {
+  dark = true;
+
+  showThemeBtn()
+  styleDarkMode();
+  setImages();
+}
+
+function lightOn() {
   dark = false;
+
+  showThemeBtn();
+  styleLightMode();
+  setImages();
 }
 
 function flipCard() {
-  const bases = grid.children;
   const btnId = this.getAttribute('data-id');
   this.classList.remove('transparent');
 
@@ -170,28 +217,14 @@ function flipCard() {
   }
 }
 
-const movesIndicator = document.querySelectorAll('.moves');
-movesIndicator.forEach(x => x.innerHTML = moves.length);
 
-const refreshBtn = document.getElementById('refresh');
-refreshBtn.addEventListener('click', refreshGame);
-
-function refreshGame() {
+function restartGame() {
   const cards = document.querySelectorAll('#card');
 
-  refreshBtn.classList.add('hidden');
-  startBtn.classList.remove('hidden');
-  levelsBtn.classList.remove('hidden');
-
-
-  if (dark) {
-    lightBtn.classList.remove('hidden');
-  } else {
-    darkBtn.classList.remove('hidden');
-  }
-
-  darkBtn.addEventListener('click', darkOn);
-  startBtn.addEventListener('click', startGame);
+  hiddenEl(restartBtn);
+  showEl(startBtn);
+  showEl(levelsBtn);
+  showThemeBtn();
 
   newArray.sort(() => 0.5 - Math.random());
 
@@ -206,7 +239,9 @@ function refreshGame() {
   };
   moves = [];
   stopStopWatch();
-  console.log(newArray);
+
+  movesIndicator.forEach(x => x.innerHTML = '0');
+  time.forEach(x => x.innerHTML = '00:00');
 }
 
 function checkWin () {
@@ -216,17 +251,17 @@ function checkWin () {
 }
 
 function finishGame () {
-  document.querySelector('.congrats').classList.remove('hidden');
+  const congrats = document.querySelector('.congrats');
+  const restartBtns = document.querySelectorAll('#restart');
+  showEl(congrats);
+
+
   clearInterval(timerInterval);
   timerInterval = undefined;
 
+  restartBtns[1].addEventListener('click', restartGame);
 }
 
-const time = document.querySelectorAll('.time');
-
-let min = 0;
-let sec = 0;
-let count = 0;
 
 function renderTime() {
   sec++;
@@ -253,7 +288,6 @@ function renderTime() {
   console.log(minString);
 }
 
-let timerInterval;
 
 function startStopWatch() {
   if (timerInterval == null) {

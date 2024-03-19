@@ -224,8 +224,8 @@ body {
 #grid {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(6, minmax(100px, 1fr));
-  grid-template-rows: repeat(3, minmax(100px, 1fr));
+  grid-template-columns: repeat(6, minmax(100px, 120px));
+  grid-template-rows: repeat(3, minmax(100px, 120px));
   gap: 20px;
 }
 #grid img {
@@ -298,13 +298,13 @@ body {
 }
 
 .congrats__container {
-  width: 60%;
+  width: 30%;
   height: 30%;
   border-radius: 30px;
   z-index: 20;
   position: absolute;
   top: 35%;
-  right: 20%;
+  right: 35%;
   background-color: #ffffff;
   border: 2px solid #aeadbd;
   display: flex;
