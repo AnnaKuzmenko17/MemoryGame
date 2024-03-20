@@ -311,6 +311,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  color: #aeadbd;
 }
 
 .congrats__tittle {
@@ -321,6 +322,14 @@ body {
 .congrats__btn {
   background-color: #aeadbd;
   color: #ffffff;
+}
+
+@media (max-width: 991.98px) {
+  .congrats__container {
+    width: 60%;
+    height: 30%;
+    right: 20%;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

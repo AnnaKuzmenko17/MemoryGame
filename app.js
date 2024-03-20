@@ -9,6 +9,7 @@ const startBtn = document.querySelector('#start');
 const levelsBtn = document.querySelector('#levels');
 const movesIndicator = document.querySelectorAll('.moves');
 const time = document.querySelectorAll('.time');
+const congrats = document.querySelector('.congrats');
 const cards = document.querySelectorAll('#card');
 
 
@@ -222,6 +223,7 @@ function restartGame() {
   const cards = document.querySelectorAll('#card');
 
   hiddenEl(restartBtn);
+  hiddenEl(congrats)
   showEl(startBtn);
   showEl(levelsBtn);
   showThemeBtn();
@@ -251,7 +253,6 @@ function checkWin () {
 }
 
 function finishGame () {
-  const congrats = document.querySelector('.congrats');
   const restartBtns = document.querySelectorAll('#restart');
   showEl(congrats);
 
