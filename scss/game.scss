@@ -12,20 +12,18 @@
   }
 
   & div {
-    // width: 100px;
-    // height: 100px;
-    background-color: #f1f1f1;
+    background-color: $basis;
     border-radius: 50%;
     border: 0;
     transition: all ease 0.5s;
   }
   
   & .match {
-    background-color: #e4cbcb;;
+    background-color: $light-pink;
   }
   
   & .check {
-    background-color: #f18b8b;
+    background-color: $dark-pink;
   }
 }
 
@@ -39,11 +37,9 @@
   margin: 0 auto;
 }
 
-
 .transparent {
   opacity: 0;
 }
-
 
 @media (max-width: 776.98px) {
   
@@ -58,8 +54,4 @@
     }
 
   }
-
-
-
-  
 }

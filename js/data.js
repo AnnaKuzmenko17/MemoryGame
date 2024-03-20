@@ -1,4 +1,4 @@
-export const cardArray = [
+export const data = [
   {
     id: 1,
     name: 'princess-1',
@@ -107,4 +107,15 @@ export const cardArray = [
     img: 'img/princess-9.png',
     dark: 'img/dark-9.png'
   },
+]
+
+export const modes = [
+  {
+    name: 'dark',
+    img: 'img/dark.png'
+  },
+  {
+    name: 'light',
+    img: 'img/light.png'
+  }
 ]

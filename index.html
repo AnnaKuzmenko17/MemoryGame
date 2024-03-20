@@ -15,14 +15,13 @@
         <div class="header__buttons">
           <button id="restart" class="header__btn btn hidden">Restart</button>
           <button id="start" class="header__btn btn">Start</button>
-          <button id="levels" class="levels__btn btn">Level</button>
+          <button id="levels" class="header__btn btn">Level</button>
+          <button class="header__btn"><img id="mode" src="img/dark.png" alt="dark-mode-icon"></button>
           <div class="levels__buttons hidden">
-            <button id="three" class="level__btn btn">3</button>
-            <button id="six" class="level__btn btn">6</button>
-            <button id="nine" class="level__btn btn">9</button>
+            <button id="3" class="level__btn btn">3</button>
+            <button id="6" class="level__btn btn">6</button>
+            <button id="9" class="level__btn btn">9</button>
           </div>
-          <button class="header__btn dark-mode"><img id="dark-mode" src="img/dark.png" alt="dark-mode-icon"></button>
-          <button class="header__btn light-mode hidden"><img id="dark-mode" src="img/light.png" alt="light-mode-icon"></button>
         </div>
       </div>
     </header>
@@ -38,7 +37,7 @@
     </section>
     <section class="congrats hidden">
       <div class="congrats__container">
-        <h2 class="congrats__tittle">Congrats!</h2>
+        <h2 class="congrats__tittle">Congrats! You won!</h2>
         <p class="congrats__results">
           <br>Time: <span class="time"></span>
           <br>Moves: <span class="moves"></span>
@@ -48,7 +47,7 @@
     </section>
   </div>
 
-  <script src="app.js" type="module"></script>
+  <script src="js/app.js" type="module"></script>
 
 </body>
 </html>

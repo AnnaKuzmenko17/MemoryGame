@@ -12,14 +12,14 @@
   border-radius: 30px;
   width: 131px;
   height: 30px;
-  background-color: #e4cbcb;
+  background-color: $light-pink;
   font-weight: 400;
   font-size: 16px;
   text-align: center;
-  color: #75728d;
+  color: $grey;
 }
 
 .indicator.dark {
-  background-color: #ffffff;
-  color: #c40909;
+  background-color: $white;
+  color: $red;
 }

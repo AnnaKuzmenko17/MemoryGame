@@ -20,17 +20,17 @@
   font-weight: 400;
   line-height: 77px;
   letter-spacing: 0em;
-  color: #F18B8B;
+  color: $dark-pink;
 
 }
 
 .tittle.dark {
-  color: #fefefe;
+  color: $basis;
 }
 
 .dark-mode {
   border: none;
-  background-color: #fff;
+  background-color: $white;
 }
 .dark-mode img {
   border-radius: 50%;
@@ -44,25 +44,47 @@
   border-radius: 30px;
   width: 131px;
   height: 30px;
-  background: #e4cbcb;
+  background-color: $light-pink;
   font-weight: 400;
   font-size: 16px;
   text-align: center;
-  color: #75728d;
+  color: $grey;
+  transition: all ease 0.3s;
+
+  &:hover {
+    background-color: $grey;
+    color: $light-pink;
+  }
 }
 
 .btn.dark {
-  color: #c40909;
+  color: $red;
+  background-color: $light-pink;
+
+  &:hover {
+    background-color: $red;
+    color: $light-pink;
+  }
 }
 
 .header__btn:nth-child(2) {
-  background-color: #75728d;
-  color: #e4cbcb;
+  background-color: $grey;
+  color: $light-pink;
+
+  &:hover {
+    background-color: $light-pink;
+    color: $grey;
+  }
 }
 
-.btn.dark:nth-child(2) {
-  background-color: #c40909;
-  color: #eef2f1;
+.dark.header__btn:nth-child(2) {
+  background-color: $red;
+  color: $light-pink;
+
+  &:hover {
+    background-color: $light-pink;
+    color: $red;
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -74,37 +96,6 @@
 
 }
 
-
-// .levels__buttons {
-//   width: 166px;
-//   height: 200px;
-//   background-color: $white;
-//   color: $grey;
-//   border-radius: 20px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   gap: 5px;
-
-  // &__tittle {
-  //   padding-left: 20px;
-  // }
-  
-
-  // &__buttons {
-  //   display: flex;
-  //   flex-direction: column;
-  //   gap: 20px;
-  //   justify-content: space-around;
-  //   align-items: center;
-  // }
-// }
-.level__btn {
-  background-color: $light-pink;
-}
-.btn {
-}
-
 .levels__buttons {
   position: absolute;
   top: 140%;
@@ -113,19 +104,13 @@
   flex-direction: column;
   gap: 15px;
   z-index: 10;
-}
-.levels__btn {
-  
-}
-.btn {
-}
-.levels__buttons {
   border-radius: 20px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   background-color: $light-pink;
+
   &::before {
     content: '';
     position: absolute;
@@ -139,10 +124,9 @@
     transform: rotate(0deg);
   }
 }
-.level__btn {
-  background-color: $light;
+
+.level__btn.dark {
   &:hover {
-    background-color: $grey;
-    color: $white;
+    background-color: $red;
   }
 }

@@ -51,60 +51,6 @@ h6 {
   font-size: inherit;
 }
 
-body {
-  font-family: "Princess Sofia", sans-serif;
-  font-weight: 400;
-}
-
-.wrapper {
-  max-width: 100vw;
-  min-height: 100vh;
-  z-index: 10;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.wrapper.dark {
-  background-color: #333333;
-}
-
-.wrapper.grey {
-  background-color: #f1f1f1;
-}
-
-[class*=__container] {
-  max-width: 1216px;
-  margin: 0 auto;
-  padding: 15px;
-}
-
-@media (max-width: 1350.98px) {
-  [class*=__container] {
-    max-width: 900px;
-    padding: 15px;
-  }
-}
-@media (max-width: 991.98px) {
-  [class*=__container] {
-    max-width: 750px;
-    padding: 10px;
-  }
-}
-@media (max-width: 767.98px) {
-  [class*=__container] {
-    max-width: none;
-    padding: 10px;
-  }
-}
-.hidden {
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-}
-
 .header {
   width: 100%;
 }
@@ -126,16 +72,16 @@ body {
   font-weight: 400;
   line-height: 77px;
   letter-spacing: 0em;
-  color: #F18B8B;
+  color: #f18b8b;
 }
 
 .tittle.dark {
-  color: #fefefe;
+  color: #f1f1f1;
 }
 
 .dark-mode {
   border: none;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .dark-mode img {
@@ -150,25 +96,43 @@ body {
   border-radius: 30px;
   width: 131px;
   height: 30px;
-  background: #e4cbcb;
+  background-color: #e4cbcb;
   font-weight: 400;
   font-size: 16px;
   text-align: center;
   color: #75728d;
+  transition: all ease 0.3s;
+}
+.btn:hover {
+  background-color: #75728d;
+  color: #e4cbcb;
 }
 
 .btn.dark {
   color: #c40909;
+  background-color: #e4cbcb;
+}
+.btn.dark:hover {
+  background-color: #c40909;
+  color: #e4cbcb;
 }
 
 .header__btn:nth-child(2) {
   background-color: #75728d;
   color: #e4cbcb;
 }
+.header__btn:nth-child(2):hover {
+  background-color: #e4cbcb;
+  color: #75728d;
+}
 
-.btn.dark:nth-child(2) {
+.dark.header__btn:nth-child(2) {
   background-color: #c40909;
-  color: #eef2f1;
+  color: #e4cbcb;
+}
+.dark.header__btn:nth-child(2):hover {
+  background-color: #e4cbcb;
+  color: #c40909;
 }
 
 @media (max-width: 991.98px) {
@@ -178,10 +142,6 @@ body {
     align-items: center;
   }
 }
-.level__btn {
-  background-color: #e4cbcb;
-}
-
 .levels__buttons {
   position: absolute;
   top: 140%;
@@ -190,9 +150,6 @@ body {
   flex-direction: column;
   gap: 15px;
   z-index: 10;
-}
-
-.levels__buttons {
   border-radius: 20px;
   padding: 10px;
   display: flex;
@@ -213,12 +170,8 @@ body {
   transform: rotate(0deg);
 }
 
-.level__btn {
-  background-color: #eef2f1;
-}
-.level__btn:hover {
-  background-color: #75728d;
-  color: #ffffff;
+.level__btn.dark:hover {
+  background-color: #c40909;
 }
 
 #grid {
@@ -297,6 +250,13 @@ body {
   color: #c40909;
 }
 
+.congrats {
+  color: #aeadbd;
+  transition: all ease 0.5s;
+}
+.congrats.dark {
+  color: #c40909;
+}
 .congrats__container {
   width: 30%;
   height: 30%;
@@ -311,17 +271,25 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  color: #aeadbd;
 }
 
 .congrats__tittle {
+  color: inherit;
   text-decoration: underline;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .congrats__btn {
   background-color: #aeadbd;
   color: #ffffff;
+}
+.congrats__btn.dark {
+  background-color: #c40909;
+  color: #ffffff;
+}
+.congrats__btn.dark:hover {
+  background-color: #e4cbcb;
+  color: #c40909;
 }
 
 @media (max-width: 991.98px) {
@@ -329,6 +297,57 @@ body {
     width: 60%;
     height: 30%;
     right: 20%;
+  }
+}
+.hidden {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+body {
+  font-family: "Princess Sofia", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.wrapper {
+  max-width: 100vw;
+  min-height: 100vh;
+  z-index: 10;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.wrapper.dark {
+  background-color: #333333;
+}
+
+[class*=__container] {
+  max-width: 1216px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+@media (max-width: 1350.98px) {
+  [class*=__container] {
+    max-width: 900px;
+    padding: 15px;
+  }
+}
+@media (max-width: 991.98px) {
+  [class*=__container] {
+    max-width: 750px;
+    padding: 10px;
+  }
+}
+@media (max-width: 767.98px) {
+  [class*=__container] {
+    max-width: none;
+    padding: 10px;
   }
 }
 
