@@ -70,6 +70,7 @@ function startGame() {
 function flipCard() {
   const btnId = this.getAttribute('data-id');
   this.classList.remove('transparent');
+  this.removeEventListener('click', flipCard);
 
   chosenCards.push(cardArray[btnId].img);
   chosenIds.push(btnId);
@@ -78,6 +79,7 @@ function flipCard() {
   if (chosenCards.length === 2) {
     setTimeout(isMatch, 300);
     movesIndicator.forEach(x => x.innerHTML = moves.length);
+
   }
 }
 
@@ -92,13 +94,14 @@ function isMatch() {
   if (chosenCards[0] === chosenCards[1]) {
     bases[firstOption].setAttribute('class', 'match');
     bases[secondOption].setAttribute('class', 'match');
-    cards[firstOption].removeEventListener('click', flipCard);
-    cards[secondOption].removeEventListener('click', flipCard);
+    
     wonIds.push(...chosenIds);
     isWinner();
   } else {
     cards[firstOption].setAttribute('class', 'transparent');
     cards[secondOption].setAttribute('class', 'transparent');
+    cards[firstOption].addEventListener('click', flipCard);
+    cards[secondOption].addEventListener('click', flipCard);
   }
 
   chosenCards = [];
