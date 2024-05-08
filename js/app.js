@@ -77,7 +77,9 @@ function flipCard() {
   moves.push(btnId);
 
   if (chosenCards.length === 2) {
-    isMatch();
+    setTimeout(() => {
+      isMatch();
+    }, 300);
     movesIndicator.forEach(x => x.innerHTML = moves.length);
   }
 }
